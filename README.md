@@ -1,6 +1,16 @@
 # Trabalho Distribuidos - Parte 2
 
-O trabalho consiste em simular um ambiente inteligente (por exemplo, casa, escritório, sala de aula, clínica médica, carro, etc). Neste ambiente deverão estar presentes Sensores (que coletam dados do ambiente) e Atuadores (que podem agir no ambiente para modificá-lo de alguma forma).
+--RESUMO:
+O trabalho consiste em simular um ambiente inteligente de casa ou escritório. Neste ambiente deverão estar presentes Sensores (que coletam dados do ambiente) e Atuadores (que podem agir no ambiente para modificá-lo de alguma forma).
+
+Todos esses sensores e atuadores serão gerenciados por um servidor chamado Home Assistant. Este equipamento deverá interagir com os sensores e os atuadores coletando informações e, eventualmente, agindo sobre o ambiente.
+
+A comunicação entre os sensores e o Home Assistant ocorrerá via Kafka, usando o paradigma Publisher/Subscriber, onde o Home Assistant se comportará como
+Subscriber e cada sensor como Publisher. O sensor deverá publicar periodicamente os dados por ele observados em uma fila/tópico próprio no Kafka, que se encarregará de notificar o Home Assistant sobre a nova mensagem.
+
+A comunicação entre o Home Assistant e os atuadores, por sua vez, deverá ocorrerá via gRPC, usando o paradigma Client/Server, onde o Home Assistent se comportará como Client e cada atuador como Server.
+
+O Home Assistant também deverá se comportar como um servidor para uma aplicação cliente que deve possibilitar interações do usuário com o ambiente inteligente. Através desta aplicação, o usuário poderá receber as informações de momento do ambiente (por exemplo, o nível de luminosidade detectado por cada sensor) e também poderá agir sobre ele (por exemplo, ligando ou desligando uma lâmpada).
 
 ## Sensores
 ### Temperatura (range)
