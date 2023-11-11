@@ -12,7 +12,7 @@ def callback(channel, method, properties, body):
         comando = 'S'
 
     # Configurar gRPC para enviar mensagens
-    channel_grpc = grpc.insecure_channel('localhost:50051')
+    channel_grpc = grpc.insecure_channel('localhost:50052')
     stub = ArCondicionadoServiceStub(channel_grpc)
 
     # Enviar mensagem ao serviço gRPC
@@ -20,14 +20,9 @@ def callback(channel, method, properties, body):
     print(f"Resposta do Servidor gRPC: {resposta.comando}")
 
 def configurar_rabbitMQ_para_receber_mensagens():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('docker_rabbitmq', port=5672))
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
     return channel
-
-def configurar_grpc_para_enviar_mensagens():
-    channel_grpc = grpc.insecure_channel('localhost:50051')
-    stub = ArCondicionadoServiceStub(channel_grpc)
-    return stub
 
 def processar(channel):
     channel.queue_declare(queue='fila_sensor_temperatura')

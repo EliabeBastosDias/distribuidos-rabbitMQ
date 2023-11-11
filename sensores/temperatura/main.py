@@ -3,7 +3,7 @@ import random
 import time
 
 def configurar_sensor_temperatura_rabbitMQ():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('docker_rabbitmq', port=5672))
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
     channel.queue_declare(queue='fila_sensor_temperatura')
     return channel

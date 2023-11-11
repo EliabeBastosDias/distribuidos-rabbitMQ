@@ -25,9 +25,9 @@ class ArCondicionado(ArCondicionadoServiceServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     add_ArCondicionadoServiceServicer_to_server(ArCondicionado(), server)
-    server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('[::]:50052')
     server.start()
-    print("Servidor gRPC iniciado na porta 50051")
+    print("Servidor gRPC iniciado na porta 50052")
     try:
         while True:
             time.sleep(86400)
