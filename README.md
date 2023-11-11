@@ -44,3 +44,20 @@ Informa se há movimentação na área próxima.
 
 ### Luz Externa
 - Liga/Desliga
+
+## Para manipular um env no python, basta:
+- (criar) python -m venv myenv
+- (ativar) source myenv/bin/activate
+- (desativar) deactivate
+
+## Para configurar o rabbitMQ:
+- sudo apt-get update
+  sudo apt-get install rabbitmq-server
+- sudo service rabbitmq-server start
+- pip install pika
+
+## Para configurar o grpc:
+- pip install grpcio grpcio-tools protobuf
+
+## Para compilar o .proto:
+- python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ar_condicionado.proto
