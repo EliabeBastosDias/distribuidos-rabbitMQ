@@ -21,6 +21,6 @@ if __name__ == '__main__':
     while (True):
         temperatura = random.randint(10, 40)
         print(f"Temperatura: {temperatura}")
-        if (not 20 <= temperatura <= 30):
+        if (temperatura <= 30):
             mandar_mensagem(channel, str(temperatura))
         time.sleep(5)
