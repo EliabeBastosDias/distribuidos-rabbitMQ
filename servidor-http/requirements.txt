@@ -1,5 +1,5 @@
-flask
 grpcio
 grpcio-tools
 protobuf
 pika
+flask

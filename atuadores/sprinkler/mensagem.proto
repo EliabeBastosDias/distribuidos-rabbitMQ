@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message Comando {
+  string comando = 1;
+}
+
+service SprinklerService {
+  rpc EnviarComando(Comando) returns (Comando);
+}

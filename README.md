@@ -46,7 +46,7 @@ Informa se há movimentação na área próxima.
 - Liga/Desliga
 
 ## Para manipular um env no python, basta:
-- (criar) python -m venv myenv
+- (criar) python3 -m venv myenv
 - (ativar) source myenv/bin/activate
 - (desativar) deactivate
 

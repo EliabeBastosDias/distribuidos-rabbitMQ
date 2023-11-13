@@ -1,13 +1,12 @@
 version: '3.7'
 
 services:
-  rabbitmq:
-    container_name: "docker_rabbitmq"
-    image: rabbitmq:3-management-alpine
-    restart: always
-    ports:
-      - '5673:5672'
-      - '15673:15672'
+  #rabbitmq:
+  #  container_name: "docker_rabbitmq"
+  #  image: rabbitmq:3-management-alpine
+  #  restart: always
+  #  ports:
+  #    - '5673:5672'
 
   sensor_temperatura:
     container_name: "docker_sensor_temperatura"
@@ -17,8 +16,6 @@ services:
     restart: always
     ports:
       - '3010:3010'
-    depends_on:
-      - rabbitmq
 
   ar_condicionado:
     container_name: "docker_ar_condicionado"
@@ -31,14 +28,24 @@ services:
     depends_on:
       - sensor_temperatura
 
-  home-assistente:
-    container_name: "docker_home_assistente"
+  servidor_grpc_temperatura:
+    container_name: "docker_servidor_grpc_temperatura"
     build:
-      context: ../home-assistente
-      dockerfile: home.dockerfile
+      context: ../servidores-grpc/ar-condicionado
+      dockerfile: ar.dockerfile
     restart: always
     ports:
       - '50051:50051'
     depends_on:
       - ar_condicionado
-      - rabbitmq
+
+  servidor_http:
+    container_name: "docker_http"
+    build:
+      context: ../servidor-http
+      dockerfile: http.dockerfile
+    restart: always
+    ports:
+      - '5000:5000'
+    depends_on:
+      - servidor_grpc_temperatura
